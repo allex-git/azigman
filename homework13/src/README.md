@@ -1,6 +1,6 @@
 # REST API for Student Management (Flask + Docker)
 
-Це застосунок, який реалізує CRUD-операції для керування студентами.
+Ця програма реалізує CRUD-операції для керування студентами. 
 Дані зберігаються у файлі **students.csv**, а API написаний на **Flask** та контейнеризований у **Docker**.
 
 Кожен студент має такі поля:
@@ -13,7 +13,7 @@
 ---
 ## 1. Встановлення (локальний запуск)
 
-###  -  створити та активувати віртуальне середовище
+###  -  створюємо та активуємо віртуальне середовище
 ```bash
 python -m venv venv
 venv\Scripts\activate      # Windows
@@ -21,12 +21,12 @@ venv\Scripts\activate      # Windows
 source venv/bin/activate   # Linux / macOS
 ```
 
-### - встановити залежності
+### - встановлюємо залежності
 ```bash
 pip install -r requirements.txt
 ```
 
-### - запустити Flask-сервер
+### - запускаємо Flask-сервер
 ```bash
 python app.py
 ```
@@ -40,17 +40,17 @@ http://127.0.0.1:5000
 ---
 ## 2. Запуск через Docker
 
-### - побудувати Docker-образ
+### - створюємо Docker-образ
 ```bash
 docker build -t homework13 .
 ```
 
-### - запустити контейнер
+### - запускаємо контейнер
 ```bash
 docker run -d -p 8000:8000 --name flask_api homework13
 ```
 
-API буде доступний на:
+API буде доступний за адресою:
 
 ```
 http://127.0.0.1:8000/students
@@ -72,41 +72,106 @@ http://127.0.0.1:8000/students
 
 ---
 
-## 4. Приклади запитів (cURL)
+## 4. Приклади запитів у **Postman**
 
-### - отримати всіх студентів
-```bash
-curl -X GET http://127.0.0.1:5000/students
+## отримати всіх студентів (GET)
+
+**Method:** GET  
+**URL:**
+```
+http://127.0.0.1:8000/students
 ```
 
-### - створити студента
-```bash
-curl -X POST http://127.0.0.1:5000/students      -H "Content-Type: application/json"      -d '{"first_name": "Alex", "last_name": "DevOps", "age": "39"}'
+---
+
+## створення студента (POST)
+
+**Method:** POST  
+**URL:**
+```
+http://127.0.0.1:8000/students
 ```
 
-### - отримати студента за ID
-```bash
-curl -X GET "http://127.0.0.1:5000/students?id=1"
+**Body → raw → JSON**
+```json
+{
+  "first_name": "Alex",
+  "last_name": "DevOps",
+  "age": "39"
+}
 ```
 
-### - отримати за прізвищем
-```bash
-curl -X GET "http://127.0.0.1:5000/students?last_name=DevOps"
+---
+
+## отримати студента за id (GET)
+
+**URL:**
+```
+http://127.0.0.1:8000/students?id=1
 ```
 
-### - оновити вік (PATCH)
-```bash
-curl -X PATCH http://127.0.0.1:5000/students      -H "Content-Type: application/json"      -d '{"id": "1", "age": "25"}'
+---
+
+## отримати за прізвищем (GET)
+
+**URL:**
+```
+http://127.0.0.1:8000/students?last_name=Kornilov
 ```
 
-### - оновити всі поля (PUT)
-```bash
-curl -X PUT http://127.0.0.1:5000/students      -H "Content-Type: application/json"      -d '{"id": "2", "first_name": "Ehor", "last_name": "Kornilov", "age": "29"}'
+---
+
+## оновлення віку (PATCH)
+
+**Method:** PATCH  
+**URL:**
+```
+http://127.0.0.1:8000/students
 ```
 
-### - видалити (DELETE)
-```bash
-curl -X DELETE http://127.0.0.1:5000/students      -H "Content-Type: application/json"      -d '{"id": "1"}'
+**Body:**
+```json
+{
+  "id": "1",
+  "age": "38"
+}
+```
+
+---
+
+## оновлення всіх полів (PUT)
+
+**Method:** PUT  
+**URL:**
+```
+http://127.0.0.1:8000/students
+```
+
+**Body:**
+```json
+{
+  "id": "2",
+  "first_name": "Ehor",
+  "last_name": "Kornilov",
+  "age": "29"
+}
+```
+
+---
+
+## видалення (DELETE)
+
+**Method:** DELETE  
+**URL:**
+```
+http://127.0.0.1:8000/students
+```
+
+**Body:**
+```json
+{
+  "id": "1"
+}
 ```
 
 ---
@@ -144,7 +209,7 @@ results.txt
 
 ---
 
-## Dockerfile
+## Зміст Dockerfile
 
 ```dockerfile
 FROM python:3.10-slim
@@ -157,10 +222,11 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
 
 ---
 
-## requirements.txt
+## зміст requirements.txt
 
 ```
 Flask
+requests
 gunicorn
 ```
 
