@@ -1,0 +1,129 @@
+1. Retrieve all existing students (GET)
+[]
+
+
+2. Create three students (POST)
+{
+  "age": "39",
+  "first_name": "Alex",
+  "id": 1,
+  "last_name": "DevOps"
+}
+
+
+2. Create three students (POST)
+{
+  "age": "28",
+  "first_name": "Ehor",
+  "id": 2,
+  "last_name": "Kornilov"
+}
+
+
+2. Create three students (POST)
+{
+  "age": "25",
+  "first_name": "Tetyana",
+  "id": 3,
+  "last_name": "Grek"
+}
+
+
+3. Retrieve information about all existing students (GET)
+[
+  {
+    "age": "39",
+    "first_name": "Alex",
+    "id": "1",
+    "last_name": "DevOps"
+  },
+  {
+    "age": "28",
+    "first_name": "Ehor",
+    "id": "2",
+    "last_name": "Kornilov"
+  },
+  {
+    "age": "25",
+    "first_name": "Tetyana",
+    "id": "3",
+    "last_name": "Grek"
+  }
+]
+
+
+4. Update the age of the second student (PATCH)
+"age updated for id=2"
+
+
+5. Retrieve information about the second student (GET)
+{
+  "age": "29",
+  "first_name": "Ehor",
+  "id": "2",
+  "last_name": "Kornilov"
+}
+
+
+6. Update the first name, last name and the age of the third student (PUT)
+{
+  "age": "26",
+  "first_name": "Tetyana",
+  "id": "3",
+  "last_name": "Grek"
+}
+
+
+7. Retrieve information about the third student (GET)
+{
+  "age": "26",
+  "first_name": "Tetyana",
+  "id": "3",
+  "last_name": "Grek"
+}
+
+
+8. Retrieve all existing students (GET)
+[
+  {
+    "age": "39",
+    "first_name": "Alex",
+    "id": "1",
+    "last_name": "DevOps"
+  },
+  {
+    "age": "29",
+    "first_name": "Ehor",
+    "id": "2",
+    "last_name": "Kornilov"
+  },
+  {
+    "age": "26",
+    "first_name": "Tetyana",
+    "id": "3",
+    "last_name": "Grek"
+  }
+]
+
+
+9. Delete the first user (DELETE)
+"student deleted"
+
+
+10. Retrieve all existing students (GET)
+[
+  {
+    "age": "29",
+    "first_name": "Ehor",
+    "id": "2",
+    "last_name": "Kornilov"
+  },
+  {
+    "age": "26",
+    "first_name": "Tetyana",
+    "id": "3",
+    "last_name": "Grek"
+  }
+]
+
+
