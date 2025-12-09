@@ -209,7 +209,7 @@ results.txt
 
 ---
 
-## Зміст Dockerfile
+## зміст Dockerfile
 
 ```dockerfile
 FROM python:3.10-slim
@@ -226,7 +226,6 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
 
 ```
 Flask
-requests
 gunicorn
 ```
 
