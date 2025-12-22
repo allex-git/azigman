@@ -1,5 +1,7 @@
 # Step project 2
 
+---
+
 # 1. Vagrantfile 
 
 Vagrantfile створює **дві VM**:
