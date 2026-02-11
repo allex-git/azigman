@@ -27,3 +27,9 @@ variable "vpc_cidr" {
   type        = string
   default     = "10.0.0.0/23"
 }
+
+variable "ansible_ssh_key_path" {
+  description = "Path to SSH key used by Ansible"
+  type        = string
+  default     = "/home/tc/AllexDevOpsKeySSH.pem"
+}
