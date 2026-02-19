@@ -1,0 +1,3 @@
+- import_tasks: 1_install.yml
+- import_tasks: 2_configure.yml
+- import_tasks: 3_deploy.yml

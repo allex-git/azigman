@@ -1,0 +1,20 @@
+- name: install docker, docker compose, nginx
+  apt:
+    name:
+      - docker.io
+      - docker-compose
+      - nginx
+    state: present
+    update_cache: yes
+
+- name: enable and start docker
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: enable and start nginx
+  systemd:
+    name: nginx
+    enabled: yes
+    state: started

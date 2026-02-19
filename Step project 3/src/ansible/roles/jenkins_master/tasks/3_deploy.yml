@@ -1,0 +1,40 @@
+- name: dploy docker-compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: /opt/jenkins/docker-compose.yml
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: start jenkins container
+  command: docker-compose up -d
+  args:
+    chdir: /opt/jenkins
+
+- name: wait jenkins
+  wait_for:
+    port: "{{ jenkins_http_port }}"
+    delay: 5
+    timeout: 180
+
+- name: deploy nginx config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/jenkins
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload nginx
+
+- name: enable nginx site
+  file:
+    src: /etc/nginx/sites-available/jenkins
+    dest: /etc/nginx/sites-enabled/jenkins
+    state: link
+    force: yes
+  notify: reload nginx
+
+- name: ensure nginx running
+  systemd:
+    name: nginx
+    state: restarted

@@ -1,0 +1,20 @@
+- name: configure docker daemon
+  template:
+    src: docker_daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart docker
+
+- name: remove default site nginx 
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: reload nginx
+
+- name: create jenkins directory
+  file:
+    path: /opt/jenkins
+    state: directory
+    mode: "0755"

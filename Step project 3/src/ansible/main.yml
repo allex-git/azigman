@@ -1,0 +1,15 @@
+- hosts: all
+  become: yes
+  roles:
+    - common
+
+- hosts: jenkins_master
+  become: yes
+  roles:
+    - jenkins_master
+
+- hosts: jenkins_worker
+  become: yes
+  roles:
+    - jenkins_worker
+

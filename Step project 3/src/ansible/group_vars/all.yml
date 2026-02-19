@@ -1,0 +1,7 @@
+jenkins_http_port: 8080
+jenkins_agent_port: 50000
+
+docker_log_max_size: "100m"
+docker_log_max_file: "3"
+
+nginx_port: 80

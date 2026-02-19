@@ -1,0 +1,14 @@
+- name: cnfig docker daemon
+  template:
+    src: docker_daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart docker
+
+- name: add ubuntu to docker group
+  user:
+    name: ubuntu
+    groups: docker
+    append: yes
