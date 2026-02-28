@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-allex-devops
+  labels:
+    app: nginx-allex-devops
+spec:
+  containers:
+    - name: nginx
+      image: nginx:stable-alpine
+      ports:
+        - containerPort: 80
+      resources:
+        limits:
+          memory: "256Mi"
+          cpu: "1000m"
+        requests:
+          memory: "128Mi"
+          cpu: "500m"
