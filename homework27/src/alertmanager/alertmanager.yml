@@ -1,0 +1,36 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: telegram
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 1m
+
+receivers:
+  - name: telegram
+    telegram_configs:
+      - bot_token: "8504172518:AAHKznvbbYENI5NqFpAAky2JqYNV2Gsz8zo"
+        chat_id: 2050022182
+        parse_mode: "HTML"
+        message: |
+            {{- if eq .Status "firing" -}}
+            🔴 <b>HW27 проблема</b>
+            {{- range .Alerts }}
+            {{- if eq .Labels.alertname "ServiceDown" }}
+            Сервіс {{ .Labels.instance }} не відповідає
+            {{- else }}
+            {{ .Annotations.summary }}
+            {{- end }}
+            {{- end }}
+            {{- else -}}
+            🟢 <b>HW27 відновлено</b>
+            {{- range .Alerts }}
+            {{- if eq .Labels.alertname "ServiceDown" }}
+            Сервіс {{ .Labels.instance }} знову доступний
+            {{- else }}
+            {{ .Annotations.summary }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+        send_resolved: true

@@ -1,0 +1,30 @@
+groups:
+- name: system-alerts
+  rules:
+
+  - alert: HighCPUUsage
+    expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Високе навантаження CPU"
+      description: "CPU > 80% більше 1 хвилини"
+
+  - alert: LowDiskSpace
+    expr: (node_filesystem_avail_bytes{mountpoint="/etc/hosts"} / node_filesystem_size_bytes{mountpoint="/etc/hosts"}) * 100 < 15
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Мало вільного місця на диску"
+      description: "Менше 80% вільного місця"
+
+  - alert: ServiceDown
+    expr: up{job=~"node-exporter|cadvisor|alertmanager"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Сервіс недоступний"
+      description: "Сервіс {{ $labels.instance }} не відповідає"
